@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mijoter</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Mijoter</h1>
+
+    <p class="subtitle">
+      Cook global dishes confidently — even as a beginner
+    </p>
+
+    <div class="suggestions">
+
+      <button onclick="fillSuggestion('Cheesy Korean noodles')">
+        Korean
+      </button>
+
+      <button onclick="fillSuggestion('Creamy white sauce pasta')">
+        Pasta
+      </button>
+
+      <button onclick="fillSuggestion('Mexican rice bowl')">
+        Mexican
+      </button>
+
+      <button onclick="fillSuggestion('Easy Japanese snack')">
+        Japanese
+      </button>
+
+      <button onclick="recommendFood()">
+        Recommend Me Something
+      </button>
+
+    </div>
+    <div class="modes">
+
+  <button onclick="toggleMode(this)">
+    🧑‍🎓 Hostel Mode
+  </button>
+
+  <button onclick="toggleMode(this)">
+    💸 Budget Meals
+  </button>
+
+  <button onclick="toggleMode(this)">
+    🌱 Vegetarian
+  </button>
+
+  <button onclick="toggleMode(this)">
+    ⚡ Quick Meals
+  </button>
+
+  <button onclick="toggleMode(this)">
+    🔥 Spicy
+  </button>
+
+</div>
+
+    <input
+      type="text"
+      id="userInput"
+      placeholder="What are you craving today?"
+    >
+
+    <button class="main-btn" onclick="generateRecipe()">
+      Generate Recipe
+    </button>
+    
+    <div id="result"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
