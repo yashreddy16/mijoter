@@ -151,7 +151,7 @@ ${input}
     console.log(data);
 
     const recipe =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      data?.text;
       if (!recipe) {
 
   resultDiv.innerHTML =

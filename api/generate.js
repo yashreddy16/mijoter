@@ -1,54 +1,59 @@
 export default async function handler(req, res) {
-
   if (req.method !== "POST") {
-
     return res.status(405).json({
-      error: "Method not allowed"
+      error: "Method not allowed",
     });
   }
 
   try {
-
     const { prompt } = req.body;
 
     const response = await fetch(
-
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-
       {
         method: "POST",
-
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
-
           contents: [
             {
+              role: "user",
               parts: [
                 {
-                  text: prompt
-                }
-              ]
-            }
-          ]
-        })
+                  text: prompt,
+                },
+              ],
+            },
+          ],
+        }),
       }
     );
 
     const data = await response.json();
 
-    console.log(data);
+    // If Gemini API fails
+    if (!response.ok) {
+      console.log("Gemini API error:", data);
 
-    return res.status(200).json(data);
+      return res.status(500).json({
+        error: data,
+      });
+    }
+
+    // Extract text safely
+    const text =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    return res.status(200).json({
+      text: text || "No response from AI",
+    });
 
   } catch (error) {
-
-    console.error(error);
+    console.log("Server error:", error);
 
     return res.status(500).json({
-      error: error.message
+      error: error.message,
     });
   }
 }
