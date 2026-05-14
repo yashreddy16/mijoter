@@ -148,16 +148,23 @@ ${input}
 });
 
     const data = await response.json();
+    console.log(data);
 
     const recipe =
-      data.candidates[0].content.parts[0].text;
+      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!recipe) {
 
+  resultDiv.innerHTML =
+    "❌ Recipe generation failed.";
+
+  return;
+}
     resultDiv.innerHTML = marked.parse(recipe);
 
   } catch (error) {
 
     resultDiv.innerHTML =
-      "❌ Something went wrong.";
+       "❌ " + error.message;
 
     console.error(error);
   }
